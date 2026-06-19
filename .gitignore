@@ -1,0 +1,10 @@
+churn-frontend/node_modules/
+churn-frontend/build/
+churn-frontend/.env*
+churn-api/__pycache__/
+churn-api/*.pkl
+churn-api/*.csv
+churn-api/.env*
+.DS_Store
+.vscode/
+
