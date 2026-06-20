@@ -40,7 +40,7 @@ if file:
     # Align columns first
     data = data.reindex(columns=columns, fill_value=0)
 
-    # 🔥 FIX TYPES EXACTLY
+    #  FIX TYPES EXACTLY
     for col in numerical_cols:
         if col in data.columns:
             data[col] = pd.to_numeric(data[col], errors="coerce")
