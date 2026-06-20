@@ -10,35 +10,35 @@ from sklearn.model_selection import train_test_split
 # Load dataset
 df = pd.read_csv("data.csv")
 
-# 🔥 STEP 1: Handle missing values
+# STEP 1: Handle missing values
 df = df.fillna(0)
 
-# 🔥 STEP 2: Automatically detect target column
+# STEP 2: Automatically detect target column
 target = df.columns[-1]   # last column as target
 
 # Split
 X = df.drop(target, axis=1)
 y = df[target]
 
-# 🔥 STEP 3: Encode target if categorical
+# STEP 3: Encode target if categorical
 if y.dtype == "object":
     le = LabelEncoder()
     y = le.fit_transform(y)
 
-# 🔥 STEP 4: Detect column types
+# STEP 4: Detect column types
 categorical_cols = X.select_dtypes(include="object").columns.tolist()
 numerical_cols = X.select_dtypes(exclude="object").columns.tolist()
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 🔥 STEP 5: Preprocessing pipeline
+# STEP 5: Preprocessing pipeline
 preprocessor = ColumnTransformer([
     ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_cols),
     ("num", StandardScaler(), numerical_cols)
 ])
 
-# 🔥 STEP 6: Multiple models (Auto selection)
+# STEP 6: Multiple models (Auto selection)
 models = {
     "LogisticRegression": LogisticRegression(max_iter=5000),
     "RandomForest": RandomForestClassifier()
@@ -67,7 +67,7 @@ for name, m in models.items():
 print("\nBest Model:", best_name)
 print("Best Accuracy:", best_score)
 
-# 🔥 STEP 7: Save EVERYTHING
+# STEP 7: Save EVERYTHING
 model_data = {
     "pipeline": best_model,
     "columns": X.columns,
